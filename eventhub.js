@@ -7,7 +7,7 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
 		this.server = RED.nodes.getNode(config.server);
 		
-        console.log(JSON.stringify(config));
+        //console.log(JSON.stringify(config));
 
 		var client = eventHubClient.restClient(
         config.serviceBusNamespace,
