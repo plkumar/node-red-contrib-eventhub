@@ -18,9 +18,13 @@ module.exports = function(RED) {
         console.log("Initializing the evenhub node.");
 
         this.on('input', function(msg) {
-			//for debug: console.log('logentries:' + JSON.stringify(msg));
-			//client.sendMessage(msg);
-            console.log('message:' + JSON.stringify(msg));
+			client.sendMessage(JSON.stringify(msg), null ,function(err,statusCode){
+                if(err) {
+                    console.log(err);
+                    console.log(statusCode);
+                }
+            });
+            //console.log('message:' + JSON.stringify(msg));
         });
         
 		this.on("close", function () {
@@ -34,15 +38,5 @@ module.exports = function(RED) {
     }
     
     RED.nodes.registerType("eventhub", EventHubNode);
-	
-	// function RemoteServerNode(config) {
-
- //        RED.nodes.createNode(this,config);
- //        this.serviceBusNamespace = config.serviceBusNamespace;
- //        this.eventHubName = config.eventHubName;
-	// 	this.sharedAccessKeyName = config.sharedAccessKeyName;
-	// 	this.sharedAccessKey = config.sharedAccessKey;
- //    }
- //    RED.nodes.registerType("eventhub",RemoteServerNode);
 }
 
