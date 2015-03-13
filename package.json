@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "event-hub-client": "^1.0.1"
+  },
+  "node-red": {
+    "nodes": {
+      "eventhub": "eventhub.js"
+    }
+  }
+}

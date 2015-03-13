@@ -1,0 +1,51 @@
+<script type="text/x-red" data-template-name="eventhub">
+    <div class="form-row">
+        <label for="node-input-serviceBusNamespace"><i class="icon-globe"></i> Servicebus Namespace</label>
+        <input type="text" id="node-input-serviceBusNamespace" placeholder="" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-eventHubName"><i class="icon-random"></i> Event Hub Name</label>
+        <input type="text" id="node-input-eventHubName" placeholder="" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-sharedAccessKeyName"><i class="icon-tag"></i> Shared Access Key Name</label>
+        <input type="text" id="node-input-sharedAccessKeyName" placeholder="" />
+    </div>
+    <div class="form-row">
+        <label for="node-input-sharedAccessKey"><i class="icon-tag"></i> Shared Access Key</label>
+        <input type="text" id="node-input-sharedAccessKey" placeholder="" />
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="eventhub">
+    <p>A node to push the messages to Azure EventHub.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('eventhub',{
+        category: 'function',
+        defaults: {
+            serviceBusNamespace: {value:"", required:true},
+            eventHubName: {value:"", required:true},
+            sharedAccessKeyName: {value:"", required:true},
+            sharedAccessKey: {value:"", required:true}
+        },
+        color:"#C0DEED",
+        inputs:1,
+        /*outputs:1,*/
+        icon: "eventhub.png",
+        label: function() {
+            return this.name||"eventhub";
+        },
+        labelStyle: function() {
+            return this.name?"node_label_italic":"";
+        },
+
+        oneditsave: function() {
+            // this.paths = $('#node-input-paths-container input:checked').map( function() {
+            //     return $(this).data('path');
+            // }).toArray();
+            console.log("edit save triggered.");
+        }
+    });
+</script>
