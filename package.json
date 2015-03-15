@@ -11,9 +11,17 @@
   "dependencies": {
     "node-sbus-amqp10": "*"
   },
+  "keywords": [ "eventhub", "servicebus", "azure", "event-hub", "node-red" ],
   "node-red": {
     "nodes": {
       "eventhub": "eventhub.js"
     }
-  }
+  },
+  "bugs": {
+        "url": "https://github.com/plkumar/node-red-contrib-eventhub/issues"
+    },
+    "author": {
+        "name": "Lakshman Peethani",
+        "url": "https://github.com/plkumar"
+    }
 }
