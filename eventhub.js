@@ -7,18 +7,29 @@ module.exports = function(RED) {
    
         this.log("Initializing the eventhub node.");
         //console.log(JSON.stringify(config));
+        if(config.serviceBusNamespace == "" ||
+            config.eventHubName=="" ||
+            config.sharedAccessKeyName ||
+            config.sharedAccessKey) {
+            this.warn("EventHub configuration not provided or incorrect.");
+            this.status({fill:"red",shape:"ring",text:"disconnected"});
+        }
 
         var sbus = require('node-sbus-amqp10');
-            var hub = sbus.EventHubClient(config.serviceBusNamespace,
-                config.eventHubName,
-                config.sharedAccessKeyName,
-                config.sharedAccessKey);
+        var hub = sbus.EventHubClient(config.serviceBusNamespace,
+            config.eventHubName,
+            config.sharedAccessKeyName,
+            config.sharedAccessKey);
+
+        if(hub) {
+            this.status({fill:"green",shape:"dot",text:"connected"});
+        }
 
         this.on('input', function(msg) {
 			
             var partitionKey = Math.floor(Math.random() * 10000).toString();
 
-            console.log('message:' + JSON.stringify(msg));
+            this.log('message:' + JSON.stringify(msg));
 
             hub.send(msg, partitionKey, function(tx_err) {
                 if(tx_err) {
