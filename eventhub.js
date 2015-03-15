@@ -4,13 +4,13 @@ module.exports = function(RED) {
     function EventHubNode(config) {
         RED.nodes.createNode(this,config);
 		//this.server = RED.nodes.getNode(config.server);
-   
+        
         this.log("Initializing the eventhub node.");
         //console.log(JSON.stringify(config));
         if(config.serviceBusNamespace == "" ||
             config.eventHubName=="" ||
-            config.sharedAccessKeyName ||
-            config.sharedAccessKey) {
+            config.sharedAccessKeyName =="" ||
+            config.sharedAccessKey =="" ) {
             this.warn("EventHub configuration not provided or incorrect.");
             this.status({fill:"red",shape:"ring",text:"disconnected"});
         }
@@ -30,14 +30,16 @@ module.exports = function(RED) {
             var partitionKey = Math.floor(Math.random() * 10000).toString();
 
             this.log('message:' + JSON.stringify(msg));
+            
+            var node = this;
 
             hub.send(msg, partitionKey, function(tx_err) {
                 if(tx_err) {
-                    this.error(tx_err);
-                    this.status({fill:"red",shape:"ring",text:"error"});
+                    node.error(tx_err);
+                    node.status({fill:"red",shape:"ring",text:"error"});
                 } else {
                     //this.log("EventHub Send successful");
-                    this.status({fill:"green",shape:"dot",text:"send success"});
+                    //node.status({fill:"green",shape:"dot",text:"send success"});
                 } 
             });
         });
