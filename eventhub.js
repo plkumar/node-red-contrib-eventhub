@@ -21,15 +21,15 @@ module.exports = function(RED) {
             config.sharedAccessKeyName,
             config.sharedAccessKey);
 
-        // if(hub) {
-        //     this.status({fill:"green",shape:"dot",text:"connected"});
-        // }
+        if(hub) {
+            this.status({fill:"green",shape:"dot",text:"connected"});
+        }
 
         this.on('input', function(msg) {
 			
             var partitionKey = Math.floor(Math.random() * 10000).toString();
 
-            this.log('message:' + JSON.stringify(msg));
+            //this.log('message:' + JSON.stringify(msg));
             
             var node = this;
 
