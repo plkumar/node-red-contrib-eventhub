@@ -21,9 +21,9 @@ module.exports = function(RED) {
             config.sharedAccessKeyName,
             config.sharedAccessKey);
 
-        if(hub) {
-            this.status({fill:"green",shape:"dot",text:"connected"});
-        }
+        // if(hub) {
+        //     this.status({fill:"green",shape:"dot",text:"connected"});
+        // }
 
         this.on('input', function(msg) {
 			
@@ -34,8 +34,10 @@ module.exports = function(RED) {
             hub.send(msg, partitionKey, function(tx_err) {
                 if(tx_err) {
                     this.error(tx_err);
+                    this.status({fill:"red",shape:"ring",text:"error"});
                 } else {
                     //this.log("EventHub Send successful");
+                    this.status({fill:"green",shape:"dot",text:"send success"});
                 } 
             });
         });
