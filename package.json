@@ -9,7 +9,6 @@
     "url": "https://github.com/plkumar/node-red-contrib-eventhub.git"
   },
   "dependencies": {
-    "event-hub-client": "^1.0.1",
     "node-sbus-amqp10": "*"
   },
   "node-red": {
