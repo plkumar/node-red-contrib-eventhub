@@ -9,6 +9,9 @@ Run the following command in the root directory of your Node-RED install (since 
 
     npm install plkumar/node-red-contrib-eventhub
 
+Links
+-----
 
-[Node-RED]:  http://nodered.org/
-[node-sbus-amqp10]: https://www.npmjs.com/package/node-sbus-amqp10
+	[Node-RED]:  http://nodered.org/
+	[node-sbus-amqp10]: https://www.npmjs.com/package/node-sbus-amqp10
+
