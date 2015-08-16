@@ -9,7 +9,7 @@
     "url": "https://github.com/plkumar/node-red-contrib-eventhub.git"
   },
   "dependencies": {
-    "node-sbus-amqp10": "*"
+    "sbus-amqp10": "*"
   },
   "keywords": [ "eventhub", "servicebus", "azure", "event-hub", "node-red" ],
   "node-red": {
