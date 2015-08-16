@@ -4,7 +4,7 @@ module.exports = function(RED) {
     function EventHubNode(config) {
         RED.nodes.createNode(this,config);
 		//this.server = RED.nodes.getNode(config.server);
-        
+
         this.log("Initializing the eventhub node.");
         //console.log(JSON.stringify(config));
         if(config.serviceBusNamespace == "" ||
@@ -15,7 +15,7 @@ module.exports = function(RED) {
             this.status({fill:"red",shape:"ring",text:"disconnected"});
         }
 
-        var sbus = require('node-sbus-amqp10');
+        var sbus = require('sbus-amqp10');
         var hub = sbus.EventHubClient(config.serviceBusNamespace,
             config.eventHubName,
             config.sharedAccessKeyName,
@@ -26,11 +26,11 @@ module.exports = function(RED) {
         }
 
         this.on('input', function(msg) {
-			
+
             var partitionKey = Math.floor(Math.random() * 10000).toString();
 
             //this.log('message:' + JSON.stringify(msg));
-            
+
             var node = this;
 
             hub.send(msg, partitionKey, function(tx_err) {
@@ -40,15 +40,15 @@ module.exports = function(RED) {
                 } else {
                     //this.log("EventHub Send successful");
                     //node.status({fill:"green",shape:"dot",text:"send success"});
-                } 
+                }
             });
         });
-        
+
 		this.on("close", function () {
             try {
                 hub = null;
                 sbus = null;
-                
+
                 this.log("received close event");
 
             } catch (error) {
@@ -56,6 +56,6 @@ module.exports = function(RED) {
             }
         });
     }
-    
+
     RED.nodes.registerType("eventhub", EventHubNode);
 }
